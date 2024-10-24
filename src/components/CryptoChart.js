@@ -1,56 +1,58 @@
-// J'importe React et les hooks dont j'ai besoin
-// useEffect, c'est pour faire des choses quand mon composant se charge
-// useState, c'est pour stocker des données qui peuvent changer
+// J'importe tout ce dont j'ai besoin pour mon super graphique !
 import React, { useEffect, useState } from 'react';
-
-// J'importe les composants de Recharts pour faire mon graphique
-// C'est une bibliothèque qui m'aide à créer des graphiques facilement
-import { LineChart, Line, XAxis, YAxis, ResponsiveContainer, ReferenceLine } from 'recharts';
-
-// J'importe ma fonction pour récupérer les données
-// Je l'ai mise dans un fichier séparé pour que ce soit plus organisé
+import { LineChart, Line, XAxis, YAxis, ResponsiveContainer, ReferenceLine, Tooltip, Area } from 'recharts';
 import { fetchCryptoData } from '../utils/api';
 
 // Je crée mon composant CryptoChart
-// Il prend deux props : cryptoId et interval
+// Ce composant va afficher le graphique des prix d'une crypto-monnaie
 const CryptoChart = ({ cryptoId, interval }) => {
-    // J'utilise useState pour stocker mes données
-    // Au début, c'est un tableau vide
+    // J'utilise useState pour stocker mes données de prix
     const [data, setData] = useState([]);
-    // J'ajoute un état pour stocker la valeur du pointeur
-    const [hoverValue, setHoverValue] = useState(null);
+    // J'utilise useState pour stocker la valeur d'ouverture
+    const [openingValue, setOpeningValue] = useState(null);
+    // J'utilise useState pour stocker la valeur de clôture
+    const [closingValue, setClosingValue] = useState(null);
+    // J'utilise useState pour stocker le pourcentage de changement
+    const [percentageChange, setPercentageChange] = useState(null);
 
-    // J'utilise useEffect pour aller chercher les données quand le composant se charge
-    // Ou quand cryptoId ou interval changent
+    // useEffect est un hook qui s'exécute après le rendu du composant
+    // Je l'utilise pour récupérer les données de l'API quand le composant se charge ou quand cryptoId ou interval changent
     useEffect(() => {
-        // Je crée une fonction pour récupérer les données
         const fetchData = async () => {
-            // J'appelle ma fonction fetchCryptoData et je stocke le résultat
+            // Je fais appel à ma fonction fetchCryptoData pour obtenir les données de l'API
             const result = await fetchCryptoData(cryptoId, interval);
-            // Je mets à jour mon état avec les nouvelles données
-            setData(result);
-        };
-        // J'appelle ma fonction fetchData
-        fetchData();
-        // Je mets cryptoId et interval dans le tableau de dépendances
-        // Comme ça, les données sont mises à jour quand ces valeurs changent
-    }, [cryptoId, interval]);
+            setData(result); // Je mets à jour l'état avec les nouvelles données
 
-    // Je crée une fonction pour formater les prix en dollars
+            // Je vérifie si j'ai des données avant de calculer les valeurs d'ouverture et de clôture
+            if (result.length > 0) {
+                const firstValue = parseFloat(result[0].priceUsd); // La première valeur est la valeur d'ouverture
+                const lastValue = parseFloat(result[result.length - 1].priceUsd); // La dernière valeur est la valeur de clôture
+                setOpeningValue(firstValue); // Je mets à jour l'état avec la valeur d'ouverture
+                setClosingValue(lastValue); // Je mets à jour l'état avec la valeur de clôture
+
+                // Je calcule le pourcentage de changement entre l'ouverture et la clôture
+                const change = ((lastValue - firstValue) / firstValue) * 100;
+                setPercentageChange(change); // Je mets à jour l'état avec le pourcentage de changement
+            }
+        };
+        fetchData(); // J'appelle ma fonction fetchData pour récupérer les données
+    }, [cryptoId, interval]); // Je déclenche ce hook quand cryptoId ou interval changent
+
+    // Cette fonction formate les prix en dollars avec trois décimales
     const formatPrice = (price) => {
-        return `$${parseFloat(price).toFixed(3)}`;
+        return `$${parseFloat(price).toFixed(3)}`; // Formatage du prix en dollars
     };
 
-    // Je vérifie si j'ai des données avant de calculer les paliers
+    // Je vérifie si j'ai des données avant de faire quoi que ce soit dans le graphique
     if (data.length === 0) {
-        return <div>Chargement...</div>; // J'affiche un message de chargement si je n'ai pas encore de données
+        return <div>Chargement en cours... J'espère que ça va marcher !</div>; // Message de chargement si pas de données
     }
 
-    // Je calcule les valeurs min et max pour l'axe Y
-    const minPrice = Math.min(...data.map(d => parseFloat(d.priceUsd)));
-    const maxPrice = Math.max(...data.map(d => parseFloat(d.priceUsd)));
+    // Je calcule les valeurs min et max pour mon axe Y afin d'ajuster le graphique correctement
+    const minPrice = Math.min(...data.map(d => parseFloat(d.priceUsd))); // Valeur minimale des prix
+    const maxPrice = Math.max(...data.map(d => parseFloat(d.priceUsd))); // Valeur maximale des prix
 
-    // Je crée mes 4 paliers pour l'axe Y
+    // Je crée mes 4 paliers pour l'axe Y afin d'afficher correctement les valeurs sur le graphique
     const yAxisTicks = [
         minPrice,
         minPrice + (maxPrice - minPrice) / 3,
@@ -58,27 +60,26 @@ const CryptoChart = ({ cryptoId, interval }) => {
         maxPrice
     ];
 
-    // Je retourne mon composant
+    // C'est ici que je retourne mon composant avec le graphique et ses éléments associés
     return (
         <div className="chart-container">
-            {/* ResponsiveContainer fait que mon graphique s'adapte à la taille de l'écran */}
             <ResponsiveContainer width="100%" height={400}>
                 <LineChart
-                    data={data}
-                    onMouseMove={(e) => {
-                        if (e.activePayload) {
-                            setHoverValue(e.activePayload[0].value);
-                        }
-                    }}
-                    onMouseLeave={() => setHoverValue(null)}
-                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                    data={data} // Les données à afficher dans le graphique
+                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }} // Marges autour du graphique pour un meilleur espacement
                 >
-                    {/* XAxis, c'est l'axe horizontal (les dates) */}
-                    {/* Je le cache complètement comme on me l'a demandé */}
+                    {/* Dégradé qui remplit la courbe */}
+                    <defs>
+                        <linearGradient id="colorUv" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0%" stopColor="#3e4460" /> {/* Couleur du début du dégradé */}
+                            <stop offset="100%" stopColor="#465a74" /> {/* Couleur de fin du dégradé */}
+                        </linearGradient>
+                    </defs>
+
+                    {/* Axe X qui affiche les dates */}
                     <XAxis dataKey="date" tick={false} axisLine={false} />
 
-                    {/* YAxis, c'est l'axe vertical (les prix) */}
-                    {/* Je configure l'axe Y comme dans le mockup */}
+                    {/* Axe Y qui affiche les prix */}
                     <YAxis
                         domain={[minPrice, maxPrice]}
                         ticks={yAxisTicks}
@@ -88,35 +89,65 @@ const CryptoChart = ({ cryptoId, interval }) => {
                         tick={{ fill: 'white', fontSize: 12 }}
                     />
 
-                    {/* J'ajoute les lignes de référence pour chaque palier */}
-                    {/* J'utilise la couleur #5c6591 comme demandé */}
+                    {/* Lignes de référence sur l'axe Y */}
                     {yAxisTicks.map(tick => (
                         <ReferenceLine key={tick} y={tick} stroke="#5c6591" strokeWidth={1} />
                     ))}
 
-                    {/* C'est ma ligne du graphique */}
+                    {/* Aire remplie sous la courbe */}
+                    <Area
+                        type="monotone"
+                        dataKey="priceUsd"
+                        stroke="#a2decd"
+                        fillOpacity={1}
+                        fill="url(#colorUv)"
+                    />
+
+                    {/* Ligne principale du graphique */}
                     <Line
                         type="monotone"
                         dataKey="priceUsd"
                         stroke="#a2decd"
                         dot={false}
                         strokeWidth={2}
-                        activeDot={{ r: 8, fill: "white", stroke: "#a2decd", strokeWidth: 3 }}
+                        activeDot={{ r: 6, fill: "white", stroke: "#a2decd", strokeWidth: 3 }} // Style du point actif sur la ligne
+                    />
+
+                    {/* Tooltip qui apparaît lors du survol */}
+                    <Tooltip
+                        content={({ active, payload }) => {
+                            if (active && payload && payload.length) {
+                                return (
+                                    <div className="custom-tooltip">
+                                        {formatPrice(payload[0].value)} {/* Affiche le prix au survol */}
+                                    </div>
+                                );
+                            }
+                            return null;
+                        }}
                     />
                 </LineChart>
             </ResponsiveContainer>
-            {/* J'affiche la valeur du pointeur */}
-            {hoverValue && (
-                <div className="hover-value">
-                    {formatPrice(hoverValue)}
-                </div>
-            )}
+
+            {/* J'affiche les valeurs d'ouverture et de clôture ainsi que le pourcentage de changement */}
+            <div className="closing-value">
+                {openingValue && closingValue && (
+                    <>
+                        <span className="opening-value">{formatPrice(openingValue)}</span> {/* Valeur d'ouverture affichée en blanc */}
+                        <span className="closing-value">{formatPrice(closingValue)}</span> {/* Valeur de clôture affichée en turquoise */}
+                        <span className={`change-indicator ${percentageChange >= 0 ? 'positive' : 'negative'}`}>
+                            {percentageChange >= 0 ? '▲' : '▼'} {/* Flèche indiquant hausse ou baisse */}
+                            {Math.abs(percentageChange).toFixed(2)}% {/* Pourcentage affiché avec deux décimales */}
+                        </span>
+                    </>
+                )}
+            </div>
         </div>
     );
 };
 
-// J'exporte mon composant pour pouvoir l'utiliser dans App.js
+// J'exporte mon composant pour qu'il puisse être utilisé ailleurs dans l'application
 export default CryptoChart;
 
-// Waouh ! J'ai réussi à faire en sorte que ça marche pour toutes les périodes !
-// C'était pas facile, mais maintenant ça s'affiche bien pour 1 semaine, 3 mois et 1 an aussi !
+// Youpi ! J'ai réussi à faire ce graphique avec plein d'infos intéressantes !
+// J'espère que ça va bien fonctionner !

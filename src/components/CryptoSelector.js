@@ -1,29 +1,38 @@
-// J'importe React, c'est toujours nécessaire quand je crée un composant
+// J'importe React parce que c'est la base de tout !
+// C'est comme si je prenais ma boîte à outils avant de commencer à bricoler
 import React from 'react';
 
-// Je crée mon composant CryptoSelector
-// Il prend deux props : selectedCrypto et onSelectCrypto
+// Je crée mon super composant CryptoSelector
+// C'est comme si je fabriquais un menu déroulant magique pour choisir des cryptos !
 const CryptoSelector = ({ selectedCrypto, onSelectCrypto }) => {
-    // Je définis une liste de cryptos disponibles
-    // Pour l'instant, je les mets en dur, mais plus tard je pourrais les récupérer d'une API
-    const cryptos = ['bitcoin', 'ethereum', 'ripple', 'litecoin', 'cardano'];
+    // Je fais une liste de toutes les cryptos que je veux dans mon menu
+    // C'est comme si je faisais la liste des ingrédients pour une recette de cuisine
+    const cryptos = [
+        { id: 'bitcoin', name: 'Bitcoin' },
+        { id: 'ethereum', name: 'Ethereum' },
+        { id: 'ripple', name: 'XRP' },
+        { id: 'cardano', name: 'Cardano' },
+        { id: 'dogecoin', name: 'Dogecoin' }
+    ];
 
-    // Je retourne mon composant
+    // Maintenant, je vais créer mon menu déroulant
+    // C'est comme si je construisais une petite machine à choisir des cryptos
     return (
         <div className="crypto-selector">
-            {/* Je mets un label pour expliquer à quoi sert le select */}
-            <label htmlFor="crypto-select">Choisissez une crypto :</label>
-            {/* Je crée un select pour choisir la crypto */}
+            {/* Je mets une étiquette pour dire à quoi sert mon menu */}
+            <label htmlFor="crypto-select">Choisissez une crypto-monnaie :</label>
+
+            {/* Et voici mon super menu déroulant ! */}
             <select
                 id="crypto-select"
                 value={selectedCrypto}
                 onChange={(e) => onSelectCrypto(e.target.value)}
             >
-                {/* Je crée une option pour chaque crypto dans ma liste */}
+                {/* Je crée une option pour chaque crypto de ma liste */}
+                {/* C'est comme si je mettais chaque ingrédient dans un petit tiroir */}
                 {cryptos.map((crypto) => (
-                    <option key={crypto} value={crypto}>
-                        {/* Je mets la première lettre en majuscule pour que ce soit plus joli */}
-                        {crypto.charAt(0).toUpperCase() + crypto.slice(1)}
+                    <option key={crypto.id} value={crypto.id}>
+                        {crypto.name}
                     </option>
                 ))}
             </select>
@@ -31,8 +40,9 @@ const CryptoSelector = ({ selectedCrypto, onSelectCrypto }) => {
     );
 };
 
-// J'exporte mon composant pour pouvoir l'utiliser dans App.js
+// J'exporte mon composant pour pouvoir l'utiliser ailleurs
+// C'est comme si je mettais mon invention dans une boîte pour l'envoyer à mes amis
 export default CryptoSelector;
 
-// Je suis contente d'avoir réussi à faire ce sélecteur !
-// C'est cool de voir comment je peux interagir avec mon application
+// Youpi ! J'ai réussi à créer mon premier composant React !
+// C'est trop cool de pouvoir choisir différentes cryptos comme ça !

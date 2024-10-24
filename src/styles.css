@@ -1,114 +1,220 @@
-/* Je définis mes couleurs principales dans des variables */
-/* Comme ça, je peux les réutiliser facilement partout dans mon CSS */
+/* Mes super couleurs pour tout le site ! 
+   Je les mets ici pour pouvoir les changer facilement si je veux */
 :root {
-    --background-color: #293053; /* C'est la couleur de fond de ma page */
-    --content-background: #333961; /* C'est la couleur de fond de mon graphique */
-    --button-selected: #e36b62; /* C'est la couleur des boutons quand ils sont sélectionnés */
-    --graph-line: #a2decd; /* C'est la couleur de la ligne de mon graphique */
-  }
-  
-  /* Je mets un fond sombre à toute ma page */
-  body {
+    --background-color: #293053;
+    /* Le fond sombre de ma page */
+    --chart-background: #333961;
+    /* Le fond un peu plus clair pour mon graphique */
+    --text-color: #ffffff;
+    /* Le texte en blanc pour qu'on puisse bien le lire */
+    --accent-color: #a2decd;
+    /* La jolie couleur turquoise pour ma ligne */
+    --button-selected: #e36b62;
+    /* La couleur pour mes boutons quand on clique dessus */
+    --gradient-start: #3e4460;
+    /* Le début du dégradé dans mon graphique */
+    --gradient-end: #465a74;
+    /* La fin du dégradé dans mon graphique */
+    --line-color: #5c6591;
+    /* La couleur des petites lignes dans mon graphique */
+}
+
+/* Le corps de ma page */
+body {
     background-color: var(--background-color);
-    color: white; /* Je mets le texte en blanc pour qu'il soit lisible sur fond sombre */
-    font-family: Arial, sans-serif; /* J'utilise une police simple et lisible */
-    margin: 0; /* J'enlève les marges par défaut du body */
-    padding: 0; /* J'enlève le padding par défaut du body */
-  }
-  
-  /* Je centre mon contenu et je lui donne une largeur de 10/12 de l'écran */
-  .container {
-    width: 83.33%; /* C'est 10/12 en pourcentage */
-    margin: 0 auto; /* Ça centre mon contenu */
-    padding: 20px; /* J'ajoute un peu d'espace autour de mon contenu */
-  }
-  
-  /* Je stylise mon titre principal */
-  h1 {
-    text-align: center; /* Je centre mon titre */
-    margin-bottom: 30px; /* J'ajoute un peu d'espace en dessous */
-  }
-  
-  /* Je mets mon menu déroulant à gauche */
-  .crypto-selector {
+    /* J'utilise ma couleur de fond sombre */
+    color: var(--text-color);
+    /* Le texte en blanc pour qu'on puisse le lire */
+    font-family: Arial, sans-serif;
+    /* Une police simple et jolie */
+    margin: 0;
+    /* Pas d'espace autour de ma page */
+    padding: 0;
+    /* Pas de rembourrage non plus */
+}
+
+/* Mon grand conteneur qui garde tout bien rangé */
+.container {
+    width: 83.33%;
+    /* Ça prend presque toute la largeur, mais pas tout à fait */
+    margin: 0 auto;
+    /* Ça centre mon contenu sur la page */
+    padding: 20px;
+    /* Un peu d'espace à l'intérieur */
+}
+
+/* Mon gros titre en haut de la page */
+h1 {
+    text-align: center;
+    /* Je le mets au milieu */
+    margin-bottom: 30px;
+    /* Un peu d'espace en dessous */
+}
+
+/* Mon menu pour choisir la crypto */
+.crypto-selector {
     text-align: left;
-    margin-bottom: 20px; /* J'ajoute un peu d'espace en dessous */
-  }
-  
-  /* Je stylise le label de mon menu déroulant */
-  .crypto-selector label {
-    margin-right: 10px; /* J'ajoute un peu d'espace entre le label et le select */
-  }
-  
-  /* Je stylise mon menu déroulant */
-  .crypto-selector select {
-    padding: 5px; /* J'ajoute un peu d'espace à l'intérieur du select */
-    border-radius: 5px; /* J'arrondis les coins un peu */
-    border: 1px solid white; /* Je mets une bordure blanche */
-    background-color: var(--background-color); /* Je mets le fond de la même couleur que la page */
-    color: white; /* Je mets le texte en blanc */
-  }
-  
-  /* Je stylise mes boutons de période */
-  .timeframe-buttons {
-    display: flex; /* Ça met mes boutons côte à côte */
-    justify-content: flex-start; /* Ça les aligne à gauche */
-    margin-bottom: 20px; /* J'ajoute un peu d'espace en dessous */
-  }
-  
-  /* Je stylise chaque bouton de période */
-  .timeframe-button {
+    /* Je l'aligne à gauche comme sur l'image */
+    margin-bottom: 20px;
+    /* Un peu d'espace en dessous */
+}
+
+/* Le texte à côté de mon menu */
+.crypto-selector label {
+    margin-right: 10px;
+    /* Un peu d'espace à droite du texte */
+}
+
+/* Mon menu déroulant pour choisir la crypto */
+.crypto-selector select {
+    padding: 5px;
+    /* Un peu d'espace à l'intérieur */
+    border-radius: 5px;
+    /* Des coins arrondis, c'est plus joli */
+    border: 1px solid var(--text-color);
+    /* Une fine bordure blanche */
     background-color: var(--background-color);
-    color: white;
-    border: 2px solid white;
-    border-radius: 20px; /* Ça rend mes boutons ronds */
-    padding: 10px 20px; /* J'ajoute de l'espace à l'intérieur des boutons */
-    margin-right: 10px; /* J'ajoute un peu d'espace entre les boutons */
-    cursor: pointer; /* Ça change le curseur quand on passe dessus */
-    transition: background-color 0.3s; /* Ça fait une jolie transition quand on clique */
-  }
-  
-  /* Je change le style quand on passe la souris sur un bouton */
-  .timeframe-button:hover {
-    background-color: rgba(255, 255, 255, 0.1); /* Je le rends un peu plus clair */
-  }
-  
-  /* Je change le style quand un bouton est sélectionné */
-  .timeframe-button.selected {
-    background-color: var(--button-selected);
-  }
-  
-  /* Je stylise mon graphique */
-  .chart-container {
-    background-color: var(--content-background);
-    border-radius: 10px; /* J'arrondis les coins */
-    padding: 20px; /* J'ajoute de l'espace à l'intérieur */
-    margin-top: 20px; /* J'ajoute un peu d'espace au-dessus */
-  }
-  
-  /* Je personnalise la ligne de mon graphique */
-  .recharts-line-curve {
-    stroke: var(--graph-line) !important; /* Je mets un !important parce que sinon ça ne marche pas */
-    stroke-width: 2; /* Je rends la ligne un peu plus épaisse */
-  }
-  
-  /* Je mets le texte en blanc dans mon graphique */
-  .recharts-text {
-    fill: white !important;
-  }
-  
-  /* Je stylise le champ qui affiche la valeur du pointeur */
-  .hover-value {
+    /* Le fond de la même couleur que la page */
+    color: var(--text-color);
+    /* Le texte en blanc */
+}
+
+/* Mes boutons pour choisir la période */
+.timeframe-buttons {
+    display: flex;
+    /* Ça met tous mes boutons côte à côte */
+    justify-content: flex-start;
+    /* Ça les aligne à gauche */
+    margin-bottom: 20px;
+    /* Un peu d'espace en dessous */
+}
+
+/* Chaque bouton de période */
+.timeframe-button {
     background-color: var(--background-color);
-    color: var(--graph-line);
-    border: 2px solid white;
+    /* Le fond de la même couleur que la page */
+    color: var(--text-color);
+    /* Le texte en blanc */
+    border: 2px solid var(--text-color);
+    /* Une bordure blanche */
     border-radius: 20px;
+    /* Des coins très arrondis pour faire des jolis boutons ronds */
     padding: 10px 20px;
-    margin-top: 10px;
-    display: inline-block;
+    /* De l'espace à l'intérieur du bouton */
+    margin-right: 10px;
+    /* Un peu d'espace entre chaque bouton */
+    cursor: pointer;
+    /* Ça change le curseur quand on passe dessus */
+    transition: background-color 0.3s;
+    /* Une petite animation quand on clique */
+}
+
+/* Quand on passe la souris sur un bouton */
+.timeframe-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    /* Il devient un tout petit peu plus clair */
+}
+
+/* Quand un bouton est sélectionné */
+.timeframe-button.selected {
+    background-color: var(--button-selected);
+    /* Il prend la couleur spéciale */
+}
+
+/* La boîte qui contient mon graphique */
+.chart-container {
+    background-color: var(--chart-background);
+    /* Le fond un peu plus clair */
+    border-radius: 10px;
+    /* Des coins arrondis */
+    padding: 20px;
+    /* De l'espace tout autour à l'intérieur */
+    margin-top: 20px;
+    /* Un peu d'espace au-dessus */
+}
+
+/* La ligne de mon graphique */
+.recharts-line-curve {
+    stroke: var(--accent-color) !important;
+    /* Ma jolie couleur turquoise */
+    stroke-width: 2;
+    /* L'épaisseur de la ligne */
+}
+
+/* Le texte dans mon graphique */
+.recharts-text {
+    fill: var(--text-color) !important;
+    /* En blanc pour qu'on puisse le lire */
+}
+
+/* La petite bulle qui apparaît quand on passe la souris sur le graphique */
+.custom-tooltip {
+    background-color: var(--background-color);
+    /* Le fond sombre */
+    border: 2px solid var(--accent-color);
+    /* Une bordure de ma couleur turquoise */
+    border-radius: 20px;
+    /* Bien arrondi */
+    padding: 10px;
+    /* De l'espace à l'intérieur */
+    color: var(--accent-color);
+    /* Le texte en turquoise */
     font-weight: bold;
-  }
-  
-  /* Je suis super contente d'avoir réussi à faire tout ce CSS ! */
-  /* C'était pas facile, mais le résultat est vraiment joli */
-  
+    /* Le texte en gras */
+}
+
+/* L'endroit où j'affiche les valeurs en bas du graphique */
+.closing-value {
+    display: flex;
+    /* Ça met tout sur une ligne */
+    justify-content: center;
+    /* Centré horizontalement */
+    align-items: center;
+    /* Centré verticalement */
+    margin-top: 10px;
+    /* Un peu d'espace au-dessus */
+    font-size: 18px;
+    /* La taille du texte */
+}
+
+/* La valeur de départ */
+.opening-value {
+    color: var(--text-color);
+    /* En blanc */
+    margin-right: 10px;
+    /* Un peu d'espace à droite */
+    margin-top: 10px;
+    /* Un peu d'espace au-dessus */
+
+}
+
+/* La valeur de fin */
+.closing-value span:nth-child(2) {
+    color: var(--accent-color);
+    /* En turquoise */
+    margin-right: 10px;
+    /* Un peu d'espace à droite */
+}
+
+/* La flèche et le pourcentage */
+.change-indicator {
+    color: var(--button-selected);
+    /* La couleur spéciale */
+    font-weight: bold;
+    /* En gras */
+    margin-top: 10px;
+    /* Un peu d'espace au-dessus */
+
+}
+
+/* Le petit point qui suit la ligne quand on bouge la souris */
+.recharts-active-dot circle {
+    fill: var(--text-color) !important;
+    /* Le centre en blanc */
+    stroke: var(--accent-color) !important;
+    /* Le contour en turquoise */
+    stroke-width: 3 !important;
+    /* L'épaisseur du contour */
+}
+
+/* Ouf ! J'ai fini mon CSS. J'espère que j'ai rien oublié et que ça va marcher... */
