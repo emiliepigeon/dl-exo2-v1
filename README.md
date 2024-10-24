@@ -140,3 +140,7 @@ Pour l'instant tout est OK.
 /////////////////////////////////////////////////////////
 
 
+Petit rappel perso
+
+l'axe des abscisses (les x ) qui est horizontal 
+et l'axe des ordonnées (les y ) qui est vertica

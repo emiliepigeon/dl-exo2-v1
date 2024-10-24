@@ -1,4 +1,4 @@
-// J'importe React, comme d'habitude
+// J'importe React parce que j'en ai besoin pour créer mon composant
 import React from 'react';
 
 // Je crée mon composant TimeframeSelector
@@ -36,5 +36,5 @@ const TimeframeSelector = ({ selectedInterval, onSelectInterval }) => {
 // J'exporte mon composant pour pouvoir l'utiliser dans App.js
 export default TimeframeSelector;
 
-// Je suis fière d'avoir réussi à faire ces boutons !
+// Les btn fonctionne.
 // C'est cool de voir comment je peux changer la période affichée
