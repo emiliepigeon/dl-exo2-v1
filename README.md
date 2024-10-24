@@ -24,8 +24,13 @@ Pour utiliser cette fonction, il faut lui donner deux informations :
 1/ cryptoId : C'est le nom de la cryptomonnaie que vous voulez (comme "bitcoin" ou "ethereum").
 !!!!!!!!!!!!!!!!!! Pour l'instant ne fonctionne qu'avec les bitcoin.
 2/ interval : C'est la période de temps pour laquelle vous voulez les données 
-(par exemple, "d1" pour un jour). 
-!!!!!!!!!!!!!!!!!! Pour l'instant tout ne fonctionne pas bien pour le reste des période de temps.
+(par exemple, "d1" pour un jour).
+3/ sous le graphique : j'affiche3 infos supplémentaires liées  à la crypto (la plus populaire / la plus interrssante et le marché avec prix élevé)
+
+et le tout en temps reel avec l'utilisation del'api CoinCap API 2.0.
+
+J'ulise aussi la bibliothèque Recharts https://recharts.org/en-US/ mais elle me pose un problème...
+je n'arrive pas à ajouter un dégradé dans l'aire de la courbe.
 _______________________________________
 
 Voici un exemple de comment l'utiliser :
@@ -56,7 +61,7 @@ Comment ça marche en coulisses / en arrière-plan derrière la vue
     C'est comme si on envoyait un message à CoinCap pour leur demander des infos.
 2/ J'ai mis tout ça dans un grand "try/catch". 
     On m'a dit que c'était important pour gérer les erreurs, même si je ne comprends pas encore tout à fait comment ça marche.
-3: Si tout se passe bien, la fonction renvoie les données. 
+3/ Si tout se passe bien, la fonction renvoie les données. 
     Si quelque chose ne va pas, elle affiche une erreur dans la console et renvoie un tableau vide.
 
 PLUSTARD ÉVOLUTIONS//////////////////////////////////////////////////////////
