@@ -64,11 +64,10 @@ export const fetchCryptoData = async (cryptoId, interval) => {
         // C'est comme si mon pigeon voyageur s'était perdu en chemin
         console.error("Zut alors ! Il y a eu un problème :", error);
         // Je renvoie un tableau vide, comme ça mon application ne va pas planter
-        // C'est mieux que rien !
         return [];
     }
 };
 
 // Hourra ! J'ai réussi à créer ma fonction pour récupérer les données des cryptos !
 // C'est comme si j'avais construit ma propre machine à voyager dans le temps des prix !
-// J'ai hâte de voir ça fonctionner dans mon application !
+// J'ai hâte de voir ça fonctionner dans mon application.

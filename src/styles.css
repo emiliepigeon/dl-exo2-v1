@@ -10,10 +10,6 @@
     --accent-color: #a2decd;
     /* La jolie couleur turquoise pour ma ligne */
     --button-selected: #e36b62;
-    /* La couleur pour mes boutons quand on clique dessus */
-    --gradient-start: #3e4460;
-    /* Le début du dégradé dans mon graphique */
-    --gradient-end: #465a74;
     /* La fin du dégradé dans mon graphique */
     --line-color: #5c6591;
     /* La couleur des petites lignes dans mon graphique */
@@ -133,6 +129,13 @@ h1 {
     /* Un peu d'espace au-dessus */
 }
 
+
+/* Dans le graphique, j'utilise ce dégradé pour remplir l'aire sous la courbe */
+.Area {
+    fill: url(#colorUv);
+    /* Utilisation du dégradé défini ci-dessus */
+}
+
 /* La ligne de mon graphique */
 .recharts-line-curve {
     stroke: var(--accent-color) !important;
@@ -165,36 +168,25 @@ h1 {
 
 /* L'endroit où j'affiche les valeurs en bas du graphique */
 .closing-value {
-    display: flex;
-    /* Ça met tout sur une ligne */
-    justify-content: center;
-    /* Centré horizontalement */
-    align-items: center;
-    /* Centré verticalement */
-    margin-top: 10px;
-    /* Un peu d'espace au-dessus */
-    font-size: 18px;
-    /* La taille du texte */
+    display: flex; /* Ça met tout sur une ligne */
+    justify-content: center; /* Centré horizontalement */
+    align-items: center; /* Centré verticalement */
+    margin-top: 10px; /* Un peu d'espace au-dessus */
+    margin-right: 25px; /* Un peu d'espace à droite */
+    font-size: 18px; /* La taille du texte */
 }
 
 /* La valeur de départ */
 .opening-value {
-    color: var(--text-color);
-    /* En blanc */
-    margin-right: 10px;
-    /* Un peu d'espace à droite */
-    margin-top: 10px;
-    /* Un peu d'espace au-dessus */
-
+    margin-right: 25px; /* Un peu d'espace à droite */
+    margin-top: 10px; /* Un peu d'espace au-dessus */
 }
 
 /* La valeur de fin */
-.closing-value span:nth-child(2) {
-    color: var(--accent-color);
-    /* En turquoise */
-    margin-right: 10px;
-    /* Un peu d'espace à droite */
+.closing-value {
+    margin-top: 10px; /* Un peu d'espace au-dessus */
 }
+
 
 /* La flèche et le pourcentage */
 .change-indicator {
@@ -204,7 +196,10 @@ h1 {
     /* En gras */
     margin-top: 10px;
     /* Un peu d'espace au-dessus */
+}
 
+.closing-value-text {
+    color: rgba(162, 222, 205, 0.7); /* Couleur #a2decd avec transparence de 70% */
 }
 
 /* Le petit point qui suit la ligne quand on bouge la souris */
@@ -216,5 +211,33 @@ h1 {
     stroke-width: 3 !important;
     /* L'épaisseur du contour */
 }
+
+/* Styles pour les nouveaux champs d'information sous le graphique */
+.additional-info {
+    display: flex; /* Utilise flexbox pour aligner horizontalement */
+    justify-content: flex-end; /* Aligne tous les éléments vers la droite */
+    margin-top: 20px; /* Un peu d'espace au-dessus pour séparer du graphique */
+}
+
+/* Chaque champ d'information sous le graphique */
+.info-field {
+    background-color: var(--background-color); /* Le fond de la même couleur que la page */
+    color: var(--text-color); /* Le texte en blanc */
+    border: 2px solid var(--text-color); /* Une bordure blanche */
+    border-radius: 20px; /* Des coins très arrondis pour un look doux */
+    padding: 10px 20px; /* De l'espace à l'intérieur du champ */
+    margin-left: 10px; /* Espace entre chaque champ d'information */
+    cursor: default; /* Garde le curseur normal car ce n'est pas cliquable */
+    transition: background-color 0.3s; /* Une petite animation quand on passe la souris */
+}
+
+/* Quand on passe la souris sur un champ d'information */
+.info-field:hover {
+    background-color: #e36b62; /* Change la couleur de fond au survol avec la couleur spécifiée */
+}
+
+
+
+
 
 /* Ouf ! J'ai fini mon CSS. J'espère que j'ai rien oublié et que ça va marcher... */

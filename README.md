@@ -144,3 +144,17 @@ Petit rappel perso
 
 l'axe des abscisses (les x ) qui est horizontal 
 et l'axe des ordonnées (les y ) qui est vertica
+
+//////////////////////////////// Prob avec dégradé avec Recharts
+
+Pour gérer le dégradé dans votre graphique, il est important de comprendre que la définition du dégradé doit être faite dans le fichier JavaScript (JSX) et non dans le CSS. Voici une explication claire sur la façon dont cela fonctionne :
+Dégradé dans Recharts
+
+    Définition du Dégradé :
+        Le dégradé est défini à l'intérieur du composant React, généralement dans la section <defs> de votre graphique. Cela permet à Recharts de savoir comment remplir l'aire sous la courbe.
+    Pas de CSS pour le Dégradé :
+        Contrairement aux styles CSS classiques, les dégradés SVG sont définis directement dans le code JSX. Vous ne pouvez pas définir un dégradé dans un fichier CSS comme vous le feriez pour une couleur de fond ou une bordure.
+
+
+    Définition du Dégradé : Assurez-vous que la définition du dégradé est bien placée dans votre fichier CryptoChart.js comme montré ci-dessus.
+    Pas de CSS pour le Dégradé : Le CSS ne doit pas contenir des définitions SVG. Les dégradés doivent être définis directement dans le JSX.
