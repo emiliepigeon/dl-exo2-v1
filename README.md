@@ -1,160 +1,91 @@
-# Getting Started with Create React App
+Documentation Technique de Mon API Crypto
+________________________________________________________________________________________
+Salut ! C'est moi qui ai créé cette super API pour récupérer des données sur les cryptomonnaies. 
+Je vais essayer d'expliquer comment ça marche, même si je suis encore en train d'apprendre 
+et pour moi c'était une première.
+_____________________________________________________________________________
+Ce que fait mon API
+________________________
+Mon API permet de récupérer des informations sur le prix des cryptomonnaies. 
+Pour l'instant, elle ne fait qu'une seule chose, mais c'est déjà pas mal !
+///////////////////
+La fonction principale : fetchCryptoData
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+J'ai créé une fonction qui s'appelle fetchCryptoData. Voici ce qu'elle fait :
 
-## Available Scripts
+1/ Elle va chercher des données sur une cryptomonnaie spécifique.
+2/ Elle peut récupérer ces données pour différentes périodes de temps.
 
-In the project directory, you can run:
+_____________________________________________________________________________
+Comment l'utiliser
+________________________
+Pour utiliser cette fonction, il faut lui donner deux informations :
 
-### `npm start`
+1/ cryptoId : C'est le nom de la cryptomonnaie que vous voulez (comme "bitcoin" ou "ethereum").
+!!!!!!!!!!!!!!!!!! Pour l'instant ne fonctionne qu'avec les bitcoin.
+2/ interval : C'est la période de temps pour laquelle vous voulez les données 
+(par exemple, "d1" pour un jour). 
+!!!!!!!!!!!!!!!!!! Pour l'instant tout ne fonctionne pas bien pour le reste des période de temps.
+_______________________________________
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Voici un exemple de comment l'utiliser :
+///////////////////////////////////////////////
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+javascript
+const data = await fetchCryptoData('bitcoin', 'd1');
 
-### `npm test`
+Ce que ça renvoie
+La fonction renvoie un tableau avec plein d'informations sur le prix de la crypto. Chaque élément du tableau ressemble à ça :
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+javascript
+{
+  time: 1623456789000,
+  date: "2021-06-11T12:33:09.000Z",
+  priceUsd: "36789.1234567890"
+}
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-
-/////////////////////////////////////////////////////////////////////////////////
-
-Choix techno REACT
-_____________________________________________________________________
-Structure du projet par rapport à l'énoncé du problème:
-
-dl-exo2-v1/
-│
-├── public/
-│   ├── index.html
-│   └── favicon.ico
-│
-├── src/
-│   ├── components/
-│   │   ├── CryptoChart.js
-│   │   ├── CryptoSelector.js
-│   │   └── TimeframeSelector.js
-│   │
-│   ├── utils/
-│   │   └── api.js
-│   │
-│   ├── App.js
-│   ├── index.js
-│   └── styles.css
-│
-├── package.json
-└── README.md
-
-////////////////////////////////////
-
-Etape 1:  Création du projet et installation des dépendances
-Node.js et npm sont déjà installés sou mon PC
-
-# Initialiser un nouveau projet React
-npx create-react-app dl-exo2-v1
-
-# Naviguer dans le dossier du projet
-cd dl-exo2-v1
-
-# Installer les dépendances supplémentaires
-npm install react-router-dom axios recharts
-
-# Démarrer le serveur de développement
-npm start
+- time : C'est un grand nombre qui représente la date et l'heure (je ne sais pas trop comment ça marche, mais apparemment c'est important).
+- date : C'est la date et l'heure sous forme de texte, plus facile à lire pour nous.
+- priceUsd : C'est le prix de la crypto en dollars américains.
 _______________________________________________________________________________
-J'ai déjà créermon dossier de travail et je suis dans le bon répertoire DONC:
 
-# Initialiser un nouveau projet React
-npx create-react-app .
+Comment ça marche en coulisses / en arrière-plan derrière la vue 
+    > mécanismes internes à l'API derrière le code
+////////////////////////////////////////////////////////////
+1/ J'utilise une chose qui s'appelle "axios" pour faire des requêtes à l'API de CoinCap. 
+    C'est comme si on envoyait un message à CoinCap pour leur demander des infos.
+2/ J'ai mis tout ça dans un grand "try/catch". 
+    On m'a dit que c'était important pour gérer les erreurs, même si je ne comprends pas encore tout à fait comment ça marche.
+3: Si tout se passe bien, la fonction renvoie les données. 
+    Si quelque chose ne va pas, elle affiche une erreur dans la console et renvoie un tableau vide.
 
-# Installer les dépendances supplémentaires
-npm install react-router-dom axios recharts
->>> problème de vulnérabilités:
-TERMINAL= added 38 packages, and audited 1579 packages in 5s
-            8 vulnerabilities (2 moderate, 6 high)
-            To address all issues (including breaking changes), run:
-                npm audit fix --force
-                Run `npm audit` for details.
+PLUSTARD ÉVOLUTIONS//////////////////////////////////////////////////////////
 
-# Démarrer le serveur de développement
-npm start
-__________________________________________________________________________________
+Limites et choses à améliorer
+Je sais que mon API n'est pas parfaite. 
+Voici quelques trucs que je pourrais améliorer plus tard :
 
-Pour l'instant tout est OK. 
-  Local:            http://localhost:3000
-  On Your Network:  http://172.30.96.1:3000
+1/ Pour l'instant, on ne peut récupérer des infos que sur une seule crypto à la fois. 
+    Ce serait cool de pouvoir en demander plusieurs d'un coup.
+2/ Je ne gère pas très bien les erreurs. 
+    Je pourrais essayer de donner plus d'informations quand quelque chose ne marche pas.
+3/ Je pourrais ajouter d'autres fonctions pour récupérer d'autres types d'informations, 
+pas seulement le prix.
 
-/////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+Comment j'ai testé
+Pour être honnête, je n'ai pas fait de vrais tests automatisés 
+(je ne sais pas encore comment faire ça). 
+J'ai surtout vérifié que ça marchait en l'utilisant dans mon application et en regardant 
+si les données s'affichaient correctement.
+_________________________________________________________________________
 
+Conclusion
+Voilà, c'est mon API ! Je suis assez fière d'avoir réussi à la faire fonctionner, 
+même si je sais qu'il y a encore plein de choses à améliorer. 
+J'espère que cette documentation aide à comprendre comment ça marche. 
 
-Petit rappel perso
+Cette documentation reflète le point de vue d'une débutante qui explique son travail. 
 
-l'axe des abscisses (les x ) qui est horizontal 
-et l'axe des ordonnées (les y ) qui est vertica
-
-//////////////////////////////// Prob avec dégradé avec Recharts
-
-Pour gérer le dégradé dans votre graphique, il est important de comprendre que la définition du dégradé doit être faite dans le fichier JavaScript (JSX) et non dans le CSS. Voici une explication claire sur la façon dont cela fonctionne :
-Dégradé dans Recharts
-
-    Définition du Dégradé :
-        Le dégradé est défini à l'intérieur du composant React, généralement dans la section <defs> de votre graphique. Cela permet à Recharts de savoir comment remplir l'aire sous la courbe.
-    Pas de CSS pour le Dégradé :
-        Contrairement aux styles CSS classiques, les dégradés SVG sont définis directement dans le code JSX. Vous ne pouvez pas définir un dégradé dans un fichier CSS comme vous le feriez pour une couleur de fond ou une bordure.
-
-
-    Définition du Dégradé : Assurez-vous que la définition du dégradé est bien placée dans votre fichier CryptoChart.js comme montré ci-dessus.
-    Pas de CSS pour le Dégradé : Le CSS ne doit pas contenir des définitions SVG. Les dégradés doivent être définis directement dans le JSX.
+Elle est détaillée tout en restant accessible, 
+et inclut des réflexions personnelles sur les limites actuelles et les améliorations possibles.
