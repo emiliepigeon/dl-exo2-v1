@@ -1,0 +1,117 @@
+/* Voici les couleurs que j'ai choisies pour mon design */
+/* Je les mets dans des variables pour pouvoir les réutiliser facilement */
+/* J'ai appris que c'était une bonne pratique pour garder mon code propre */
+:root {
+    --background-color: #293053; /* C'est la couleur de fond de toute ma page */
+    --content-background: #333961; /* C'est la couleur de fond de mon graphique */
+    --button-selected: #e36b62; /* C'est la couleur des boutons quand ils sont sélectionnés */
+    --graph-line: #a2decd; /* C'est la couleur de la ligne de mon graphique */
+    --graph-gradient-start: #373f64; /* C'est le début du dégradé dans mon graphique */
+    --graph-gradient-end: #3c4b6b; /* C'est la fin du dégradé dans mon graphique */
+}
+
+  /* Je mets un fond sombre à toute ma page */
+body {
+    background-color: var(--background-color);
+    color: white; /* Je mets le texte en blanc pour qu'il soit lisible sur fond sombre */
+    font-family: Arial, sans-serif; /* J'utilise une police simple et lisible */
+    margin: 0; /* J'enlève les marges par défaut du body */
+    padding: 0; /* J'enlève le padding par défaut du body */
+}
+
+  /* Je centre mon contenu et je lui donne une largeur de 10/12 de l'écran */
+  /* C'est comme ça que j'ai compris qu'il fallait faire d'après le mockup */
+.container {
+    width: 83.33%; /* C'est 10/12 en pourcentage */
+    margin: 0 auto; /* Ça centre mon contenu */
+    padding: 20px; /* J'ajoute un peu d'espace autour de mon contenu */
+}
+
+  /* Je stylise mon titre principal */
+h1 {
+    text-align: center; /* Je centre mon titre */
+    margin-bottom: 30px; /* J'ajoute un peu d'espace en dessous */
+}
+
+  /* Je mets mon menu déroulant à gauche */
+.crypto-selector {
+    text-align: left;
+    margin-bottom: 20px; /* J'ajoute un peu d'espace en dessous */
+}
+
+  /* Je stylise le label de mon menu déroulant */
+.crypto-selector label {
+    margin-right: 10px; /* J'ajoute un peu d'espace entre le label et le select */
+}
+
+  /* Je stylise mon menu déroulant */
+.crypto-selector select {
+    padding: 5px; /* J'ajoute un peu d'espace à l'intérieur du select */
+    border-radius: 5px; /* J'arrondis les coins un peu */
+    border: 1px solid white; /* Je mets une bordure blanche */
+    background-color: var(--background-color); /* Je mets le fond de la même couleur que la page */
+    color: white; /* Je mets le texte en blanc */
+}
+
+  /* Je stylise mes boutons de période */
+.timeframe-buttons {
+    display: flex; /* Ça met mes boutons côte à côte */
+    justify-content: flex-start; /* Ça les aligne à gauche */
+    margin-bottom: 20px; /* J'ajoute un peu d'espace en dessous */
+}
+
+  /* Je stylise chaque bouton de période */
+.timeframe-button {
+    background-color: var(--background-color);
+    color: white;
+    border: 2px solid white;
+    border-radius: 20px; /* Ça rend mes boutons ronds */
+    padding: 10px 20px; /* J'ajoute de l'espace à l'intérieur des boutons */
+    margin-right: 10px; /* J'ajoute un peu d'espace entre les boutons */
+    cursor: pointer; /* Ça change le curseur quand on passe dessus */
+    transition: background-color 0.3s; /* Ça fait une jolie transition quand on clique */
+}
+
+  /* Je change le style quand on passe la souris sur un bouton */
+.timeframe-button:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Je le rends un peu plus clair */
+}
+
+  /* Je change le style quand un bouton est sélectionné */
+.timeframe-button.selected {
+    background-color: var(--button-selected);
+}
+
+  /* Je stylise mon graphique */
+  .chart-container {
+    background-color: var(--content-background);
+    border-radius: 10px; /* J'arrondis les coins */
+    padding: 20px; /* J'ajoute de l'espace à l'intérieur */
+    margin-top: 20px; /* J'ajoute un peu d'espace au-dessus */
+  }
+  
+  /* Je personnalise la ligne de mon graphique */
+  .recharts-line-curve {
+    stroke: var(--graph-line) !important; /* Je mets un !important parce que sinon ça ne marche pas */
+    stroke-width: 2; /* Je rends la ligne un peu plus épaisse */
+  }
+  
+  /* Je crée un dégradé pour l'intérieur de mon graphique */
+  .recharts-area {
+    fill: url(#areaGradient) !important; /* J'utilise le dégradé que j'ai défini dans mon composant */
+  }
+  
+  /* Je stylise le pointeur sur ma courbe */
+  .recharts-tooltip-cursor {
+    stroke: var(--graph-line);
+    stroke-width: 2;
+  }
+  
+  /* Je mets le texte en blanc dans mon graphique */
+  .recharts-text {
+    fill: white !important;
+  }
+  
+  /* Je suis super contente d'avoir réussi à faire tout ce CSS ! */
+  /* C'était pas facile, mais le résultat est vraiment joli */
+  
